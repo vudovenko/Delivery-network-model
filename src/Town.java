@@ -1,55 +1,44 @@
-public class Town {
-    private int numberStores;
-    private int distanceToBase;
-    private int demand;
-    private boolean isDemandSatisfied;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Town(int numberStores, int distanceToBase, int demand, boolean isDemandSatisfied) {
-        this.numberStores = numberStores;
+public class Town {
+    private List<Store> stores;
+    private Integer distanceToBase;
+    private Integer demand;
+
+    public Town(Integer numberStores, Integer distanceToBase, Integer demand) {
+        stores = new ArrayList<>(numberStores);
         this.distanceToBase = distanceToBase;
         this.demand = demand;
-        this.isDemandSatisfied = isDemandSatisfied;
     }
 
-    public int getNumberStores() {
-        return numberStores;
+    public List<Store> getStores() {
+        return stores;
     }
 
-    public int getDistanceToBase() {
+    public void setStores(List<Store> stores) {
+        this.stores = stores;
+    }
+
+    public Integer getDistanceToBase() {
         return distanceToBase;
     }
 
-    public int getDemand() {
-        return demand;
-    }
-
-    public boolean isDemandSatisfied() {
-        return isDemandSatisfied;
-    }
-
-    public void setNumberStores(int numberStores) {
-        this.numberStores = numberStores;
-    }
-
-    public void setDistanceToBase(int distanceToBase) {
+    public void setDistanceToBase(Integer distanceToBase) {
         this.distanceToBase = distanceToBase;
     }
 
-    public void setDemand(int demand) {
+    public Integer getDemand() {
+        return demand;
+    }
+
+    public void setDemand(Integer demand) {
         this.demand = demand;
     }
 
-    public void setDemandSatisfied(boolean demandSatisfied) {
-        isDemandSatisfied = demandSatisfied;
-    }
-
-    @Override
-    public String toString() {
-        return "Town{" +
-                "numberStores=" + numberStores +
-                ", distanceToBase=" + distanceToBase +
-                ", demand=" + demand +
-                ", isDemandSatisfied=" + isDemandSatisfied +
-                '}';
+    public void showStatus() {
+        for (Store store : stores) {
+            store.showStatus();
+        }
     }
 }
