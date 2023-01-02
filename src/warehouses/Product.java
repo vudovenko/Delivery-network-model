@@ -4,21 +4,21 @@ import interfaces.DemonstratingStatus;
 
 public class Product implements DemonstratingStatus {
 
-    private String warehouseName;
+    private Warehouse warehouseName;
     private Boolean isTruckInWarehouse;
     private String productName;
 
-    public Product(String warehouseName, Boolean isTruckInWarehouse, String productName) {
+    public Product(Warehouse warehouseName, Boolean isTruckInWarehouse, String productName) {
         this.warehouseName = warehouseName;
         this.isTruckInWarehouse = isTruckInWarehouse;
         this.productName = productName;
     }
 
-    public String getWarehouseName() {
+    public Warehouse getWarehouseName() {
         return warehouseName;
     }
 
-    public void setWarehouseName(String warehouseName) {
+    public void setWarehouseName(Warehouse warehouseName) {
         this.warehouseName = warehouseName;
     }
 

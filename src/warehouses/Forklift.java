@@ -3,7 +3,7 @@ package warehouses;
 import interfaces.DemonstratingStatus;
 
 public class Forklift implements DemonstratingStatus {
-    private String warehouseName;
+    private Warehouse warehouseName;
     private Boolean isTruckInWarehouse;
 
     @Override
@@ -15,16 +15,16 @@ public class Forklift implements DemonstratingStatus {
         }
     }
 
-    public Forklift(String warehouseName, Boolean isTruckInWarehouse) {
+    public Forklift(Warehouse warehouseName, Boolean isTruckInWarehouse) {
         this.warehouseName = warehouseName;
         this.isTruckInWarehouse = isTruckInWarehouse;
     }
 
-    public String getWarehouseName() {
+    public Warehouse getWarehouseName() {
         return warehouseName;
     }
 
-    public void setWarehouseName(String warehouseName) {
+    public void setWarehouseName(Warehouse warehouseName) {
         this.warehouseName = warehouseName;
     }
 

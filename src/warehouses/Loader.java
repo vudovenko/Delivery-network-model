@@ -4,7 +4,7 @@ import interfaces.DemonstratingStatus;
 
 public class Loader implements DemonstratingStatus {
 
-    private String warehouseName;
+    private Warehouse warehouseName;
     private Integer loaderNumber;
     private Boolean isTruckInWarehouse;
 
@@ -19,18 +19,26 @@ public class Loader implements DemonstratingStatus {
         }
     }
 
-    public Loader(String warehouseName, Integer loaderNumber, Boolean isTruckInWarehouse) {
+    public Loader(Warehouse warehouseName, Integer loaderNumber, Boolean isTruckInWarehouse) {
         this.warehouseName = warehouseName;
         this.loaderNumber = loaderNumber;
         this.isTruckInWarehouse = isTruckInWarehouse;
     }
 
-    public String getWarehouseName() {
+    public Warehouse getWarehouseName() {
         return warehouseName;
     }
 
-    public void setWarehouseName(String warehouseName) {
+    public void setWarehouseName(Warehouse warehouseName) {
         this.warehouseName = warehouseName;
+    }
+
+    public Integer getLoaderNumber() {
+        return loaderNumber;
+    }
+
+    public void setLoaderNumber(Integer loaderNumber) {
+        this.loaderNumber = loaderNumber;
     }
 
     public Boolean getTruckInWarehouse() {
