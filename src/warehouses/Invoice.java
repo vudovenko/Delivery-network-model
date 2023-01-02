@@ -3,28 +3,28 @@ package warehouses;
 import interfaces.DemonstratingStatus;
 
 public class Invoice implements DemonstratingStatus {
-    private String warehouseName;
+    private Warehouse warehouseName;
     private Boolean isLoadingCompleted;
 
     @Override
     public void showStatus() {
         if (isLoadingCompleted) {
-            System.out.println("Накаладная со склада " + warehouseName + " выдана водителю");
+            System.out.println("Накладная со склада " + warehouseName + " выдана водителю");
         } else {
             System.out.println("Погрузка товара на складе " + warehouseName + "еще не закончена");
         }
     }
 
-    public Invoice(String warehouseName, Boolean isLoadingCompleted) {
+    public Invoice(Warehouse warehouseName, Boolean isLoadingCompleted) {
         this.warehouseName = warehouseName;
         this.isLoadingCompleted = isLoadingCompleted;
     }
 
-    public String getWarehouseName() {
+    public Warehouse getWarehouseName() {
         return warehouseName;
     }
 
-    public void setWarehouseName(String warehouseName) {
+    public void setWarehouseName(Warehouse warehouseName) {
         this.warehouseName = warehouseName;
     }
 
