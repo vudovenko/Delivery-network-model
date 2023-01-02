@@ -1,3 +1,5 @@
+package towns;
+
 public class Store {
     private Boolean isDemandSatisfied;
 
