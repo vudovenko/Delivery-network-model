@@ -1,9 +1,11 @@
 package towns;
 
+import interfaces.DemonstratingStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Town {
+public class Town implements DemonstratingStatus {
     private List<Store> stores;
     private Integer distanceToBase;
     private Integer demand;
@@ -38,6 +40,7 @@ public class Town {
         this.demand = demand;
     }
 
+    @Override
     public void showStatus() {
         for (Store store : stores) {
             store.showStatus();
