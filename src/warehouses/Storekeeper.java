@@ -1,15 +1,24 @@
 package warehouses;
 
-public class Storekeeper {
+import interfaces.DemonstratingStatus;
+
+public class Storekeeper implements DemonstratingStatus {
 
     private String warehouseName;
+    private Boolean isTruckInWarehouse;
 
-    public void GoToLoadingPost() {
-        System.out.println("Кладовщик склада " + warehouseName + " идет на пост загрузки");
+    @Override
+    public void showStatus() {
+        if (isTruckInWarehouse) {
+            System.out.println("Кладовщик склада " + warehouseName + " идет на пост загрузки");
+        } else {
+            System.out.println("Кладовщик склада " + warehouseName + "бездействует");
+        }
     }
 
-    public Storekeeper(String warehouseName) {
+    public Storekeeper(String warehouseName, Boolean isTruckInWarehouse) {
         this.warehouseName = warehouseName;
+        this.isTruckInWarehouse = isTruckInWarehouse;
     }
 
     public String getWarehouseName() {
