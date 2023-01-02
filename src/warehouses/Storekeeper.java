@@ -4,35 +4,35 @@ import interfaces.DemonstratingStatus;
 
 public class Storekeeper implements DemonstratingStatus {
 
-    private String warehouseName;
+    private String storekeeperName;
     private Boolean isTruckInWarehouse;
 
     @Override
     public void showStatus() {
         if (isTruckInWarehouse) {
-            System.out.println("Кладовщик склада " + warehouseName + " идет на пост загрузки");
+            System.out.println("Кладовщик склада " + storekeeperName + " идет на пост загрузки");
         } else {
-            System.out.println("Кладовщик склада " + warehouseName + " бездействует");
+            System.out.println("Кладовщик склада " + storekeeperName + " бездействует");
         }
     }
 
-    public Storekeeper(String warehouseName, Boolean isTruckInWarehouse) {
-        this.warehouseName = warehouseName;
+    public Storekeeper(String storekeeperName, Boolean isTruckInWarehouse) {
+        this.storekeeperName = storekeeperName;
         this.isTruckInWarehouse = isTruckInWarehouse;
     }
 
-    public String getWarehouseName() {
-        return warehouseName;
+    public String getStorekeeperName() {
+        return storekeeperName;
     }
 
-    public void setWarehouseName(String warehouseName) {
-        this.warehouseName = warehouseName;
+    public void setStorekeeperName(String storekeeperName) {
+        this.storekeeperName = storekeeperName;
     }
 
     @Override
     public String toString() {
         return "Storekeeper{" +
-                "warehouseName='" + warehouseName + '\'' +
+                "warehouseName='" + storekeeperName + '\'' +
                 '}';
     }
 }
