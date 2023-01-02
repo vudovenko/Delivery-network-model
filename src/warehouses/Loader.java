@@ -12,7 +12,7 @@ public class Loader implements DemonstratingStatus {
     public void showStatus() {
         if (isTruckInWarehouse) {
             System.out.println("Грузчик № " + loaderNumber
-                    + " склада " + warehouseName + " идет на пост загрузки");
+                    + " склада " + warehouseName + " загружает товар");
         } else {
             System.out.println("Грузчик № " + loaderNumber
                     + " склада " + warehouseName + " бездействует");
