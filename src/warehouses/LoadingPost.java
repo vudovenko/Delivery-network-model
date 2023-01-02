@@ -4,29 +4,29 @@ import interfaces.DemonstratingStatus;
 
 public class LoadingPost implements DemonstratingStatus {
 
-    private String loadingPostName;
+    private String warehouseName;
     private Boolean isTruckInWarehouse;
 
-    public LoadingPost(String loadingPostName, Boolean isTruckInWarehouse) {
-        this.loadingPostName = loadingPostName;
+    public LoadingPost(String warehouseName, Boolean isTruckInWarehouse) {
+        this.warehouseName = warehouseName;
         this.isTruckInWarehouse = isTruckInWarehouse;
     }
 
     @Override
     public void showStatus() {
         if (isTruckInWarehouse) {
-            System.out.println("Пост загрузки \"" + loadingPostName + "\" занят");
+            System.out.println("Пост погрузки склада \"" + warehouseName + "\" занят");
         } else {
-            System.out.println("Пост загрузки \"" + loadingPostName + "\" пустует");
+            System.out.println("Пост загрузки склада \"" + warehouseName + "\" пустует");
         }
     }
 
-    public String getLoadingPostName() {
-        return loadingPostName;
+    public String getWarehouseName() {
+        return warehouseName;
     }
 
-    public void setLoadingPostName(String loadingPostName) {
-        this.loadingPostName = loadingPostName;
+    public void setWarehouseName(String warehouseName) {
+        this.warehouseName = warehouseName;
     }
 
     public Boolean getTruckInWarehouse() {
@@ -40,7 +40,7 @@ public class LoadingPost implements DemonstratingStatus {
     @Override
     public String toString() {
         return "LoadingPost{" +
-                "loadingPostName='" + loadingPostName + '\'' +
+                "loadingPostName='" + warehouseName + '\'' +
                 ", isTruckInWarehouse=" + isTruckInWarehouse +
                 '}';
     }
