@@ -12,7 +12,7 @@ public class Storekeeper implements DemonstratingStatus {
         if (isTruckInWarehouse) {
             System.out.println("Кладовщик склада " + warehouseName + " идет на пост загрузки");
         } else {
-            System.out.println("Кладовщик склада " + warehouseName + "бездействует");
+            System.out.println("Кладовщик склада " + warehouseName + " бездействует");
         }
     }
 
