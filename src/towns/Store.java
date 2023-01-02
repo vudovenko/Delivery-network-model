@@ -1,6 +1,8 @@
 package towns;
 
-public class Store {
+import interfaces.DemonstratingStatus;
+
+public class Store implements DemonstratingStatus {
     private Boolean isDemandSatisfied;
 
     public Store() {
@@ -19,6 +21,14 @@ public class Store {
         isDemandSatisfied = demandSatisfied;
     }
 
+    @Override
+    public String toString() {
+        return "Store{" +
+                "isDemandSatisfied=" + isDemandSatisfied +
+                '}';
+    }
+
+    @Override
     public void showStatus() {
         if (isDemandSatisfied) {
             System.out.println("Спрос магазина удовлетворен");
