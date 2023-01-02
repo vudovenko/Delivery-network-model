@@ -1,6 +1,10 @@
 public class Store {
     private Boolean isDemandSatisfied;
 
+    public Store() {
+        this.isDemandSatisfied = true;
+    }
+
     public Store(Boolean isDemandSatisfied) {
         this.isDemandSatisfied = isDemandSatisfied;
     }
