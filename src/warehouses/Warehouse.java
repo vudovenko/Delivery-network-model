@@ -11,6 +11,9 @@ public class Warehouse {
     private Product product;
     private Storekeeper storekeeper;
     private static Boolean isTruckInWarehouse;
+    /*todo
+       сделать метод,
+       проверяющий еcть ли место на складе для грузовика*/
 
     public Warehouse(String warehouseName, String productName) {
         this.warehouseName = warehouseName;
