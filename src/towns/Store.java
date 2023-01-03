@@ -33,7 +33,7 @@ public class Store implements DemonstratingStatus {
         if (isDemandSatisfied) {
             System.out.println("Спрос магазина удовлетворен");
         } else {
-            System.out.println("Спрос магазина пока еще не удовлетвоерен");
+            System.out.println("Спрос магазина пока еще не удовлетворен");
         }
     }
 }
