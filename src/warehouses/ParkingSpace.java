@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 public class ParkingSpace {
 
-    private LinkedList<Car> parkingQueue;
+    private final LinkedList<Car> parkingQueue;
     private Integer parkingSize;
 
     public ParkingSpace() {
