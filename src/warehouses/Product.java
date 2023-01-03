@@ -3,14 +3,11 @@ package warehouses;
 import interfaces.DemonstratingStatus;
 
 public class Product implements DemonstratingStatus {
-
     private Warehouse warehouseName;
-    private Boolean isTruckInWarehouse;
     private String productName;
 
-    public Product(Warehouse warehouseName, Boolean isTruckInWarehouse, String productName) {
+    public Product(Warehouse warehouseName, String productName) {
         this.warehouseName = warehouseName;
-        this.isTruckInWarehouse = isTruckInWarehouse;
         this.productName = productName;
     }
 
@@ -20,14 +17,6 @@ public class Product implements DemonstratingStatus {
 
     public void setWarehouseName(Warehouse warehouseName) {
         this.warehouseName = warehouseName;
-    }
-
-    public Boolean getTruckInWarehouse() {
-        return isTruckInWarehouse;
-    }
-
-    public void setTruckInWarehouse(Boolean truckInWarehouse) {
-        isTruckInWarehouse = truckInWarehouse;
     }
 
     public String getProductName() {
@@ -40,7 +29,7 @@ public class Product implements DemonstratingStatus {
 
     @Override
     public void showStatus() {
-        if (isTruckInWarehouse) {
+        if (warehouseName.getIsTruckInWarehouse()) {
             System.out.println("Товар " + productName
                     + " со склада " + warehouseName + " загружается в грузовик");
         } else {
@@ -52,8 +41,7 @@ public class Product implements DemonstratingStatus {
     @Override
     public String toString() {
         return "Product{" +
-                "warehouseName='" + warehouseName + '\'' +
-                ", isTruckInWarehouse=" + isTruckInWarehouse +
+                "warehouseName=" + warehouseName +
                 ", productName='" + productName + '\'' +
                 '}';
     }
