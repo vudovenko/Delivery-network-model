@@ -8,7 +8,7 @@ public class Loader implements DemonstratingStatus {
 
     @Override
     public void showStatus() {
-        if (warehouseName.getIsTruckInWarehouse()) {
+        if (warehouseName.isThereRoomInWarehouseForTruck()) {
             System.out.println("Грузчик со склада " + warehouseName + " загружает товар");
         } else {
             System.out.println("Грузчик со склада " + warehouseName + " бездействует");

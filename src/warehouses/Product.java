@@ -29,7 +29,7 @@ public class Product implements DemonstratingStatus {
 
     @Override
     public void showStatus() {
-        if (warehouseName.getIsTruckInWarehouse()) {
+        if (warehouseName.isThereRoomInWarehouseForTruck()) {
             System.out.println("Товар " + productName
                     + " со склада " + warehouseName + " загружается в грузовик");
         } else {

@@ -7,7 +7,7 @@ public class Forklift implements DemonstratingStatus {
 
     @Override
     public void showStatus() {
-        if (warehouseName.getIsTruckInWarehouse()) {
+        if (warehouseName.isThereRoomInWarehouseForTruck()) {
             System.out.println("Погрузчик начал погрузку на складе " + warehouseName);
         } else {
             System.out.println("Погрузчик свободен " + warehouseName);
