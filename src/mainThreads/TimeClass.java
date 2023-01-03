@@ -1,12 +1,43 @@
 package mainThreads;
 
-public class TimeClass implements Runnable {
+import java.util.Calendar;
+import java.util.Date;
 
-    /*todo
-    *  1) найти подходящий тип данных для даты
-    *  2) создать поле private Date ... , конструктор, геттеры, сеттеры, тустринг
-    *  3) найти метод увеличения времени в этом поле, допустим,
-    *  на 1 секунду. Т.е. будто арифметическая операция, только прибавляем время*/
+public class TimeClass implements Runnable {
+    private Date date;
+
+    public TimeClass() {
+        this.date = new Date();
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "TimeClass{" +
+                "date=" + date +
+                '}';
+    }
+
+    public void increaseTime(TypeTime typeTime, Integer number) {
+        if (typeTime == TypeTime.MILLISECOND) {
+            this.date = new Date(this.date.getTime() + number);
+        } else if (typeTime == TypeTime.SECOND) {
+            this.date = new Date(this.date.getTime() + number * 1000);
+        } else if (typeTime == TypeTime.MINUTE) {
+            this.date = new Date(this.date.getTime() + number * 60 * 1000);
+        } else if (typeTime == TypeTime.HOUR) {
+            this.date = new Date(this.date.getTime() + number * 60 * 60 * 1000);
+        } else {
+            this.date = new Date(this.date.getTime() + number * 24 * 60 * 60 * 1000);
+        }
+    }
 
     @Override
     public void run() {

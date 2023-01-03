@@ -15,7 +15,7 @@ public class Loader implements DemonstratingStatus {
         }
     }
 
-    public Loader(Warehouse warehouseName, Integer loaderNumber) {
+    public Loader(Warehouse warehouseName) {
         this.warehouseName = warehouseName;
     }
 

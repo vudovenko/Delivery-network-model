@@ -16,7 +16,7 @@ public class Warehouse {
         this.warehouseName = warehouseName;
         this.forklift = new Forklift(this);
         this.invoice = new Invoice(this);
-        this.loaders = new Loader(this, 2);
+        this.loaders = new Loader(this);
         this.loadingPost = new LoadingPost(this);
         this.product = new Product(this, productName);
         this.storekeeper = new Storekeeper(this);
