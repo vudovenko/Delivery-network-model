@@ -6,11 +6,10 @@ public class Loader implements DemonstratingStatus {
 
     private Warehouse warehouseName;
     private Integer loaderNumber;
-    private Boolean isTruckInWarehouse;
 
     @Override
     public void showStatus() {
-        if (isTruckInWarehouse) {
+        if (warehouseName.getIsTruckInWarehouse()) {
             System.out.println("Грузчик № " + loaderNumber
                     + " склада " + warehouseName + " загружает товар");
         } else {
@@ -19,10 +18,9 @@ public class Loader implements DemonstratingStatus {
         }
     }
 
-    public Loader(Warehouse warehouseName, Integer loaderNumber, Boolean isTruckInWarehouse) {
+    public Loader(Warehouse warehouseName, Integer loaderNumber) {
         this.warehouseName = warehouseName;
         this.loaderNumber = loaderNumber;
-        this.isTruckInWarehouse = isTruckInWarehouse;
     }
 
     public Warehouse getWarehouseName() {
@@ -41,19 +39,11 @@ public class Loader implements DemonstratingStatus {
         this.loaderNumber = loaderNumber;
     }
 
-    public Boolean getTruckInWarehouse() {
-        return isTruckInWarehouse;
-    }
-
-    public void setTruckInWarehouse(Boolean truckInWarehouse) {
-        isTruckInWarehouse = truckInWarehouse;
-    }
-
     @Override
     public String toString() {
         return "Loader{" +
-                "loaderName='" + warehouseName + '\'' +
-                ", isTruckInWarehouse=" + isTruckInWarehouse +
+                "warehouseName=" + warehouseName +
+                ", loaderNumber=" + loaderNumber +
                 '}';
     }
 }
