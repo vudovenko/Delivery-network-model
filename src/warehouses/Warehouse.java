@@ -6,27 +6,45 @@ public class Warehouse {
     private String warehouseName;
     private Forklift forklift;
     private Invoice invoice;
-    private Loader loader; //TODO реализовать номер грузчика на складе
+    private Loader loaders;
     private LoadingPost loadingPost;
     private Product product;
     private Storekeeper storekeeper;
-    private static Boolean isTruckInWarehouse;
-    /*todo
-       сделать метод,
-       проверяющий еcть ли место на складе для грузовика*/
+    private static Integer numberTrucksInStock;
 
     public Warehouse(String warehouseName, String productName) {
         this.warehouseName = warehouseName;
         this.forklift = new Forklift(this);
         this.invoice = new Invoice(this);
-        this.loader = new Loader(this, 2);
+        this.loaders = new Loader(this, 2);
         this.loadingPost = new LoadingPost(this);
         this.product = new Product(this, productName);
         this.storekeeper = new Storekeeper(this);
+        numberTrucksInStock = 0;
     }
 
-    public static Boolean getIsTruckInWarehouse() {
-        return isTruckInWarehouse;
+    public Boolean isThereRoomInWarehouseForTruck() {
+        if (numberTrucksInStock == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Loader getLoaders() {
+        return loaders;
+    }
+
+    public void setLoaders(Loader loaders) {
+        this.loaders = loaders;
+    }
+
+    public static Integer getNumberTrucksInStock() {
+        return numberTrucksInStock;
+    }
+
+    public static void setNumberTrucksInStock(Integer numberTrucksInStock) {
+        Warehouse.numberTrucksInStock = numberTrucksInStock;
     }
 
     public String getWarehouseName() {
@@ -53,14 +71,6 @@ public class Warehouse {
         this.invoice = invoice;
     }
 
-    public Loader getLoader() {
-        return loader;
-    }
-
-    public void setLoader(Loader loader) {
-        this.loader = loader;
-    }
-
     public LoadingPost getLoadingPost() {
         return loadingPost;
     }
@@ -83,10 +93,6 @@ public class Warehouse {
 
     public void setStorekeeper(Storekeeper storekeeper) {
         this.storekeeper = storekeeper;
-    }
-
-    public static void setIsTruckInWarehouse(Boolean isTruckInWarehouse) {
-        Warehouse.isTruckInWarehouse = isTruckInWarehouse;
     }
 
     public void startLoadingProcess(Car car) {

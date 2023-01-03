@@ -7,7 +7,7 @@ public class Invoice implements DemonstratingStatus {
 
     @Override
     public void showStatus() {
-        if (warehouseName.getIsTruckInWarehouse()) {
+        if (warehouseName.isThereRoomInWarehouseForTruck()) {
             System.out.println("Накладная со склада " + warehouseName + " выдана водителю");
         } else {
             System.out.println("Погрузка товара на складе " + warehouseName + "еще не закончена");
