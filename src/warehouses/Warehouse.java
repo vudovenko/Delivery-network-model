@@ -26,10 +26,6 @@ public class Warehouse {
         return isTruckInWarehouse;
     }
 
-    public static void setIsTruckInWarehouse(Boolean isTruckInWarehouse) {
-        Warehouse.isTruckInWarehouse = isTruckInWarehouse;
-    }
-
     public String getWarehouseName() {
         return warehouseName;
     }
@@ -84,6 +80,10 @@ public class Warehouse {
 
     public void setStorekeeper(Storekeeper storekeeper) {
         this.storekeeper = storekeeper;
+    }
+
+    public static void setIsTruckInWarehouse(Boolean isTruckInWarehouse) {
+        Warehouse.isTruckInWarehouse = isTruckInWarehouse;
     }
 
     public void startLoadingProcess(Car car) {
