@@ -87,6 +87,13 @@ public class Warehouse {
     }
 
     public void startLoadingProcess(Car car) {
-
+        /*TODO 1. Машина добавляется в очередь в любом случае
+           2. Если она в очереди первая или вторая, то вызов showStatus()
+              у Storekeeper, у LoadingPost, у Forklift и у Loader
+              Начинается отсчет времени (1 час) для warehouse.
+              Срабатывает метод showStatus() у товара и у накладной.
+              Удаляется из очереди.
+           3. Если в очереди не первая или вторая, то ждет своей очереди.
+        */
     }
 }
