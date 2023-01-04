@@ -16,6 +16,12 @@ public class CarPark {
         warehouse.runMachineToWarehouse(trucks.pollFirst());
     }
 
+    public static void sendCarToPark(Truck truck) {
+        trucks.addLast(truck);
+        System.out.println("Грузовик прибыл в парк. " +
+                "Машин в парке: " + trucks.size() + " штук");
+    }
+
     public ArrayDeque<Truck> getTrucks() {
         return trucks;
     }
