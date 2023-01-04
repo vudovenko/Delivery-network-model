@@ -1,6 +1,7 @@
 package warehouses;
 
 import cars.Car;
+import cars.Truck;
 import mainThreads.TimeClass;
 import towns.TypeProduct;
 
@@ -112,8 +113,8 @@ public class Warehouse extends Thread {
                 System.out.println("numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() != 0 = "
                         + (numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() != 0) + "\n");
                 if (numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() > 0) {
-                    parkingSpace.removeCarFromParkingSpace();
-                    startLoadingProcess();
+                    Truck truck = (Truck) parkingSpace.removeCarFromParkingSpace();
+                    startLoadingProcess(truck);
                 }
             }
 
@@ -131,7 +132,7 @@ public class Warehouse extends Thread {
         }
     }
 
-    private void startLoadingProcess() {
+    private void startLoadingProcess(Truck truck) {
         synchronized (this) {
             numberTrucksInWarehouse++;
         }
@@ -147,7 +148,9 @@ public class Warehouse extends Thread {
                     product.showStatus();
                     invoice.showStatus();
                     System.out.println("numberTrucksInWarehouse = " + numberTrucksInWarehouse + "\n");
-                    this.numberTrucksInWarehouse--;
+                    numberTrucksInWarehouse--;
+                    System.out.println("Грузовик выехал со склада " + warehouseName);
+                    CarPark.sendCarToPark(truck);
                 }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);

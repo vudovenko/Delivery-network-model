@@ -19,9 +19,9 @@ public class ParkingSpace {
         parkingSize++;
     }
 
-    public void removeCarFromParkingSpace() {
-        parkingQueue.pollFirst();
+    public Car removeCarFromParkingSpace() {
         parkingSize--;
+        return parkingQueue.pollFirst();
     }
 
     public Integer getParkingSize() {
