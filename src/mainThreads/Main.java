@@ -14,10 +14,14 @@ public class Main {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         //Вывод нынешней даты и времени
         System.out.println("\nДата: " + new Date().toString());
-        Town Ekaterinburg = new Town(7, randomNumberInRange(10, 30), 1);
-        Town NizhnyTagil = new Town(5, randomNumberInRange(130, 140), 2);
-        Town KamenskUralsky = new Town(4, randomNumberInRange(125, 135), 3);
-        Town SatelliteTownsYekaterinburg = new Town(4, randomNumberInRange(10, 30), 4);
+        Town Ekaterinburg = new Town(7, randomNumberInRange(10, 30),
+                1, "Екатерибург");
+        Town NizhnyTagil = new Town(5, randomNumberInRange(130, 140),
+                2, "Нижний Тагил");
+        Town KamenskUralsky = new Town(4, randomNumberInRange(125, 135),
+                3, "Каменск-Уральский");
+        Town SatelliteTownsYekaterinburg = new Town(4, randomNumberInRange(10, 30),
+                4, "спуника Екатеринбурга");
         while (true) {
             Ekaterinburg.generateRequest();
             NizhnyTagil.generateRequest();
