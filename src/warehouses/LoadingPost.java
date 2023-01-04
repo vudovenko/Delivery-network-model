@@ -12,7 +12,7 @@ public class LoadingPost implements DemonstratingStatus {
 
     @Override
     public void showStatus() {
-        if (warehouseName.isThereRoomInWarehouseForTruck()) {
+        if (warehouseName.areThereTrucksInWarehouse()) {
             System.out.println("Пост погрузки склада \"" + warehouseName.getWarehouseName() + "\" занят");
         } else {
             System.out.println("Пост загрузки склада \"" + warehouseName.getWarehouseName() + "\" пустует");
