@@ -7,10 +7,10 @@ import java.util.List;
 
 public class Base {
 
-    private List<Warehouse> warehouses;
+    private static List<Warehouse> warehouses;
 
     public Base(List<Warehouse> warehouses) {
-        this.warehouses = warehouses;
+        Base.warehouses = warehouses;
     }
 
     public List<Warehouse> getWarehouses() {
@@ -18,22 +18,22 @@ public class Base {
     }
 
     public void setWarehouses(List<Warehouse> warehouses) {
-        this.warehouses = warehouses;
+        Base.warehouses = warehouses;
     }
 
-    private static void getProductRequest(OrderRequest orderRequest) {
+    public static void getProductRequest(OrderRequest orderRequest) {
         System.out.printf("База получила запрос из города \"" + orderRequest.getTown()
                 + "\" от магазина №" + orderRequest.getShopId()
                 + " на товар \"" + orderRequest.getTypeProduct() + "\"");
+        Warehouse warehouse = Base.findSuitableWarehouse(orderRequest.getTypeProduct());
 
+        CarPark.sendCarToWarehouse(warehouse);
     }
 
-    private Warehouse findSuitableWarehouse(TypeProduct typeProduct) {
+    public static Warehouse findSuitableWarehouse(TypeProduct typeProduct) {
         for (Warehouse warehouse : warehouses) {
             if (warehouse.getProduct().getTypeProduct().equals(typeProduct)) {
-                /*
-                * todo
-                *  доделать поиск склада*/
+                return warehouse;
             }
         }
         return null;
