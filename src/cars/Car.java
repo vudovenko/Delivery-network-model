@@ -1,6 +1,6 @@
 package cars;
 
-public abstract class Car extends Thread {
+public abstract class Car {
     private Integer speed;
 
     public Car(Integer speed) {
@@ -13,15 +13,6 @@ public abstract class Car extends Thread {
 
     public void setSpeed(Integer speed) {
         this.speed = speed;
-    }
-
-    @Override
-    public void run() {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
