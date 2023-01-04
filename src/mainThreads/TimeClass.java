@@ -2,7 +2,7 @@ package mainThreads;
 
 import java.util.Date;
 
-public class TimeClass implements Runnable {
+public class TimeClass extends Thread {
     private volatile Date date;
     public static final Integer VIRTUAL_HOUR = 5000;
 
@@ -43,9 +43,9 @@ public class TimeClass implements Runnable {
     public void run() {
         while (true) {
             try {
+                System.out.println("\nCurrent time: " + date + "\n");
                 Thread.sleep(VIRTUAL_HOUR);
                 increaseTime(TypeTime.HOUR, 1);
-                System.out.println("Current time: " + date);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
