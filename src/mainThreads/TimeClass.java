@@ -1,10 +1,9 @@
 package mainThreads;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class TimeClass implements Runnable {
-    private Date date;
+    private volatile Date date;
 
     public TimeClass() {
         this.date = new Date();
@@ -25,7 +24,7 @@ public class TimeClass implements Runnable {
                 '}';
     }
 
-    public void increaseTime(TypeTime typeTime, Integer number) {
+    public synchronized void increaseTime(TypeTime typeTime, Integer number) {
         if (typeTime == TypeTime.MILLISECOND) {
             this.date = new Date(this.date.getTime() + number);
         } else if (typeTime == TypeTime.SECOND) {
@@ -41,6 +40,6 @@ public class TimeClass implements Runnable {
 
     @Override
     public void run() {
-        //todo доделать
+        //todo доделать главный поток времени
     }
 }
