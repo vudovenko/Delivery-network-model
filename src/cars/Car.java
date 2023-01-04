@@ -1,20 +1,10 @@
 package cars;
 
-public abstract class Car {
-    private TypeMachine typeMachine;
+public abstract class Car extends Thread {
     private Integer speed;
 
-    public Car(TypeMachine typeMachine, Integer speed) {
-        this.typeMachine = typeMachine;
+    public Car(Integer speed) {
         this.speed = speed;
-    }
-
-    public TypeMachine getTypeMachine() {
-        return typeMachine;
-    }
-
-    public void setTypeMachine(TypeMachine typeMachine) {
-        this.typeMachine = typeMachine;
     }
 
     public Integer getSpeed() {
@@ -26,10 +16,18 @@ public abstract class Car {
     }
 
     @Override
+    public void run() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
     public String toString() {
         return "Car{" +
-                "typeMachine=" + typeMachine +
-                ", speed=" + speed +
+                "speed=" + speed +
                 '}';
     }
 }
