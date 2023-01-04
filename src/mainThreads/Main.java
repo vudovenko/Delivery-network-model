@@ -14,16 +14,19 @@ public class Main {
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         //Вывод нынешней даты и времени
         System.out.println("\nДата: " + new Date().toString());
-        Town Ekaterinburg = new Town(7, RandomNumberInRange(10, 30), 1.0/1);
-        Town NizhnyTagil = new Town(5, RandomNumberInRange(130, 140), 1.0/2);
-        Town KamenskUralsky = new Town(4, RandomNumberInRange(125, 135), 1.0/3);
-        Town SatelliteTownsYekaterinburg = new Town(4, RandomNumberInRange(10, 30), 1.0/4);
+        Town Ekaterinburg = new Town(7, randomNumberInRange(10, 30), 1);
+        Town NizhnyTagil = new Town(5, randomNumberInRange(130, 140), 2);
+        Town KamenskUralsky = new Town(4, randomNumberInRange(125, 135), 3);
+        Town SatelliteTownsYekaterinburg = new Town(4, randomNumberInRange(10, 30), 4);
         while (true) {
-            
+            Ekaterinburg.generateRequest();
+            NizhnyTagil.generateRequest();
+            KamenskUralsky.generateRequest();
+            SatelliteTownsYekaterinburg.generateRequest();
         }
     }
 
-    private static Integer RandomNumberInRange(Integer min, Integer max) {
+    public static Integer randomNumberInRange(Integer min, Integer max) {
         return (int)(Math.random()*((max-min)+1))+min;
     }
 }
