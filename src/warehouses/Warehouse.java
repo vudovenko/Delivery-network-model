@@ -6,45 +6,43 @@ public class Warehouse {
     private String warehouseName;
     private Forklift forklift;
     private Invoice invoice;
-    private Loader loaders;
+    private Loader loader;
     private LoadingPost loadingPost;
     private Product product;
     private Storekeeper storekeeper;
-    private static Integer numberTrucksInStock;
+    private ParkingSpace parkingSpace;
+    private static Integer numberTrucksInWarehouse;
 
     public Warehouse(String warehouseName, String productName) {
         this.warehouseName = warehouseName;
         this.forklift = new Forklift(this);
         this.invoice = new Invoice(this);
-        this.loaders = new Loader(this);
+        this.loader = new Loader(this);
         this.loadingPost = new LoadingPost(this);
         this.product = new Product(this, productName);
         this.storekeeper = new Storekeeper(this);
-        numberTrucksInStock = 0;
+        parkingSpace = new ParkingSpace();
+        numberTrucksInWarehouse = 0;
     }
 
-    public Boolean isThereRoomInWarehouseForTruck() {
-        if (numberTrucksInStock == 0) {
-            return true;
-        } else {
-            return false;
-        }
+    public synchronized Boolean isThereRoomInWarehouseForTruck() {
+        return numberTrucksInWarehouse == 0;
     }
 
-    public Loader getLoaders() {
-        return loaders;
+    public Loader getLoader() {
+        return loader;
     }
 
-    public void setLoaders(Loader loaders) {
-        this.loaders = loaders;
+    public void setLoader(Loader loader) {
+        this.loader = loader;
     }
 
-    public static Integer getNumberTrucksInStock() {
-        return numberTrucksInStock;
+    public synchronized static Integer getNumberTrucksInWarehouse() {
+        return numberTrucksInWarehouse;
     }
 
-    public static void setNumberTrucksInStock(Integer numberTrucksInStock) {
-        Warehouse.numberTrucksInStock = numberTrucksInStock;
+    public synchronized static void setNumberTrucksInWarehouse(Integer numberTrucksInWarehouse) {
+        Warehouse.numberTrucksInWarehouse = numberTrucksInWarehouse;
     }
 
     public String getWarehouseName() {
@@ -87,6 +85,14 @@ public class Warehouse {
         this.product = product;
     }
 
+    public ParkingSpace getParkingSpace() {
+        return parkingSpace;
+    }
+
+    public void setParkingSpace(ParkingSpace parkingSpace) {
+        this.parkingSpace = parkingSpace;
+    }
+
     public Storekeeper getStorekeeper() {
         return storekeeper;
     }
@@ -96,7 +102,8 @@ public class Warehouse {
     }
 
     public void startLoadingProcess(Car car) {
-        /*TODO 1. Машина добавляется в очередь в любом случае
+        /*TODO
+           1. Машина добавляется в очередь в любом случае
            2. Если она в очереди первая или вторая, то вызов showStatus()
               у Storekeeper, у LoadingPost, у Forklift и у Loader
               Начинается отсчет времени (1 час) для warehouse.
@@ -104,5 +111,44 @@ public class Warehouse {
               Удаляется из очереди.
            3. Если в очереди не первая или вторая, то ждет своей очереди.
         */
+        parkingSpace.addCarToParkingSpace(car);
+        if (parkingSpace.getParkingSize() == 1) {
+            runMachineToWarehouse(car);
+        } else if (parkingSpace.getParkingSize() == 2) {
+            runMachineToWarehouse(car);
+        } else {
+            while(parkingSpace.getParkingSize() > 2) {
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            startLoadingProcess(car);
+        }
+    }
+
+    private synchronized void runMachineToWarehouse(Car car) {
+        numberTrucksInWarehouse++;
+        storekeeper.showStatus();
+        loadingPost.showStatus();
+        forklift.showStatus();
+        loader.showStatus();
+        parkingSpace.removeCarFromParkingSpace();
+        car.start();
+        try {
+            car.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        product.showStatus();
+        invoice.showStatus();
+    }
+
+    @Override
+    public String toString() {
+        return "Warehouse{" +
+                "warehouseName='" + warehouseName + '\'' +
+                '}';
     }
 }
