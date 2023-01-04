@@ -1,11 +1,13 @@
 package towns;
 
 import interfaces.DemonstratingStatus;
+import mainThreads.Main;
 
 public class Store implements DemonstratingStatus {
     private Town town;
     private Integer id;
     private Boolean isDemandSatisfied;
+    private TypeProduct thisProductNeed;
 
     public Store(Town town, Integer id) {
         this.town = town;
@@ -29,12 +31,20 @@ public class Store implements DemonstratingStatus {
         this.id = id;
     }
 
-    public Boolean getDemandSatisfied() {
+    public Boolean getIsDemandSatisfied() {
         return isDemandSatisfied;
     }
 
-    public void setDemandSatisfied(Boolean demandSatisfied) {
+    public void setIsDemandSatisfied(Boolean demandSatisfied) {
         isDemandSatisfied = demandSatisfied;
+    }
+
+    public TypeProduct getThisProductNeed() {
+        return thisProductNeed;
+    }
+
+    public void setThisProductNeed(TypeProduct thisProductNeed) {
+        this.thisProductNeed = thisProductNeed;
     }
 
     @Override
@@ -49,7 +59,22 @@ public class Store implements DemonstratingStatus {
         if (isDemandSatisfied) {
             System.out.println("Спрос магазина удовлетворен");
         } else {
-            System.out.println("Магазин нуждается в товаре");
+            thisProductNeed = generateRandomTypeProduct();
+            System.out.println("В городе " + town.getTownName() + " магазин №" + id +
+                    " нуждается в товаре " + thisProductNeed.getName());
+        }
+    }
+
+    private TypeProduct generateRandomTypeProduct() {
+        int randomNumber = Main.randomNumberInRange(1, 4);
+        if (randomNumber == 1) {
+            return TypeProduct.HEAVY_OVERSIZE;
+        } else if (randomNumber == 2) {
+            return TypeProduct.HEAVY_EURO_PALLETS;
+        } else if (randomNumber == 3) {
+            return TypeProduct.PLUMBING;
+        } else {
+            return TypeProduct.LIGHT_EURO_PALLETS;
         }
     }
 }
