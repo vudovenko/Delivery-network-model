@@ -22,9 +22,9 @@ public class Base {
     }
 
     public static void getProductRequest(OrderRequest orderRequest) {
-        System.out.printf("База получила запрос из города \"" + orderRequest.getTown()
+        System.out.printf("База получила запрос из города \"" + orderRequest.getTown().getTownName()
                 + "\" от магазина №" + orderRequest.getShopId()
-                + " на товар \"" + orderRequest.getTypeProduct() + "\"");
+                + " на товар \"" + orderRequest.getTypeProduct().getName() + "\"");
         Warehouse warehouse = Base.findSuitableWarehouse(orderRequest.getTypeProduct());
 
         CarPark.sendCarToWarehouse(warehouse);

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class TimeClass extends Thread {
     private volatile Date date;
-    public static final Integer VIRTUAL_HOUR = 5000;
+    public static final Integer VIRTUAL_HOUR = 100;
 
     public TimeClass() {
         this.date = new Date();

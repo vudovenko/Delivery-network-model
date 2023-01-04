@@ -7,12 +7,15 @@ import java.util.ArrayDeque;
 public class CarPark {
     private static ArrayDeque<Truck> trucks;
 
-    public CarPark(ArrayDeque<Truck> trucks) {
-        CarPark.trucks = trucks;
+    public CarPark() {
+        trucks = new ArrayDeque<>();
+        for (int i = 0; i < 20; i++) {
+            trucks.addLast(new Truck(30)); // todo поработать над скоростью траков
+        }
     }
 
     public static void sendCarToWarehouse(Warehouse warehouse) {
-        System.out.println("Грузовик едет на склад " + warehouse);
+        System.out.println("\nГрузовик едет на склад " + warehouse.getWarehouseName() + "\n");
         warehouse.runMachineToWarehouse(trucks.pollFirst());
     }
 

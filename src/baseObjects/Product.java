@@ -31,10 +31,10 @@ public class Product implements DemonstratingStatus {
     @Override
     public void showStatus() {
         if (warehouseName.areThereTrucksInWarehouse()) {
-            System.out.println("Товар " + typeProduct
+            System.out.println("Товар " + typeProduct.getName()
                     + " со склада " + warehouseName.getWarehouseName() + " загружается в грузовик");
         } else {
-            System.out.println("Товар " + typeProduct
+            System.out.println("Товар " + typeProduct.getName()
                     + " со склада " + warehouseName.getWarehouseName() + " лежит");
         }
     }

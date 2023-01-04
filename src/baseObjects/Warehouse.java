@@ -108,10 +108,10 @@ public class Warehouse extends Thread {
     public void run() {
         while (true) {
             synchronized (this) {
-                System.out.println("\nnumberTrucksInWarehouse = " + numberTrucksInWarehouse);
-                System.out.println("parkingSpace.getParkingSize() = " + parkingSpace.getParkingSize());
-                System.out.println("numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() != 0 = "
-                        + (numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() != 0) + "\n");
+//                System.out.println("\nnumberTrucksInWarehouse = " + numberTrucksInWarehouse);
+//                System.out.println("parkingSpace.getParkingSize() = " + parkingSpace.getParkingSize());
+//                System.out.println("numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() != 0 = "
+//                        + (numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() != 0) + "\n");
                 if (numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() > 0) {
                     Truck truck = (Truck) parkingSpace.removeCarFromParkingSpace();
                     startLoadingProcess(truck);

@@ -5,16 +5,18 @@ import mainThreads.Main;
 import mainThreads.TimeClass;
 import baseObjects.Base;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Town extends Thread implements DemonstratingStatus {
+public class Town extends Thread {
     private List<Store> stores;
     private Integer distanceToBase;
     private Integer demand;
     private String townName;
 
     public Town(Integer numberStores, Integer distanceToBase, Integer demand, String townName) {
-        for (int i = 1; i <= numberStores; ++i) {
+        stores = new ArrayList<>();
+        for (int i = 0; i < numberStores; i++) {
             stores.add(new Store(this, i));
         }
         this.distanceToBase = distanceToBase;
@@ -56,11 +58,13 @@ public class Town extends Thread implements DemonstratingStatus {
 
     @Override
     public void run() {
-        new Thread(() -> generateRequest()).start();
-        try {
-            Thread.sleep((long) demand * 24 * TimeClass.VIRTUAL_HOUR);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        while (true) {
+            new Thread(() -> generateRequest()).start();
+            try {
+                Thread.sleep((long) demand * 24 * TimeClass.VIRTUAL_HOUR);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -71,7 +75,7 @@ public class Town extends Thread implements DemonstratingStatus {
             throw new RuntimeException(e);
         }
 
-        Integer randomStoreId = Main.randomNumberInRange(0, stores.size());
+        Integer randomStoreId = Main.randomNumberInRange(0, stores.size() - 1);
         Store store = new Store(this, randomStoreId);
         store.setIsDemandSatisfied(false);
         stores.set(randomStoreId, store);
@@ -79,12 +83,5 @@ public class Town extends Thread implements DemonstratingStatus {
         OrderRequest orderRequest = new OrderRequest(this, randomStoreId,
                 stores.get(randomStoreId).getThisProductNeed());
         Base.getProductRequest(orderRequest);
-    }
-
-    @Override
-    public void showStatus() {
-        for (Store store : stores) {
-            store.showStatus();
-        }
     }
 }
