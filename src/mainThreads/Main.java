@@ -15,7 +15,7 @@ public class Main {
         Town KamenskUralsky = new Town(4, randomNumberInRange(125, 135),
                 3, "Каменск-Уральский");
         Town SatelliteTownsYekaterinburg = new Town(4, randomNumberInRange(10, 30),
-                4, "спуника Екатеринбурга");
+                4, "спутника Екатеринбурга");
         while (true) {
             Ekaterinburg.start();
             NizhnyTagil.start();
