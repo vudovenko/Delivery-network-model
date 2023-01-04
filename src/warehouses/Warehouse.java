@@ -2,6 +2,7 @@ package warehouses;
 
 import cars.Car;
 import mainThreads.TimeClass;
+import towns.TypeProduct;
 
 public class Warehouse extends Thread {
     private String warehouseName;
@@ -14,13 +15,13 @@ public class Warehouse extends Thread {
     private ParkingSpace parkingSpace;
     private static Integer numberTrucksInWarehouse;
 
-    public Warehouse(String warehouseName, String productName) {
+    public Warehouse(String warehouseName, TypeProduct typeProduct) {
         this.warehouseName = warehouseName;
         this.forklift = new Forklift(this);
         this.invoice = new Invoice(this);
         this.loader = new Loader(this);
         this.loadingPost = new LoadingPost(this);
-        this.product = new Product(this, productName);
+        this.product = new Product(this, typeProduct);
         this.storekeeper = new Storekeeper(this);
         parkingSpace = new ParkingSpace();
         numberTrucksInWarehouse = 0;
