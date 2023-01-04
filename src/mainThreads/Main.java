@@ -10,6 +10,16 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+
+        /*
+         * todo
+         *  Камаз сделать класс
+         *  Подсуетиться с зп водителя и грузчика (день/ночь)
+         *  Клин код, пж + красиво
+         *  Подкорректировать вывод в консоль
+         *  Километры и сон потоков грузовиков
+         * */
+
         TimeClass timeClass = new TimeClass();
         Town Ekaterinburg = new Town(7, randomNumberInRange(10, 30),
                 1, "Екатеринбург");
