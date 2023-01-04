@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class TimeClass implements Runnable {
     private volatile Date date;
+    public static final Integer VIRTUAL_HOUR = 5000;
 
     public TimeClass() {
         this.date = new Date();
@@ -40,6 +41,14 @@ public class TimeClass implements Runnable {
 
     @Override
     public void run() {
-        //todo доделать главный поток времени
+        while (true) {
+            try {
+                Thread.sleep(VIRTUAL_HOUR);
+                increaseTime(TypeTime.HOUR, 1);
+                System.out.println("Current time: " + date);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 }

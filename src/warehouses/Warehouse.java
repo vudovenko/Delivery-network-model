@@ -1,6 +1,7 @@
 package warehouses;
 
 import cars.Car;
+import mainThreads.TimeClass;
 
 public class Warehouse extends Thread {
     private String warehouseName;
@@ -140,7 +141,7 @@ public class Warehouse extends Thread {
         loader.showStatus();
         new Thread(() -> {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(TimeClass.VIRTUAL_HOUR);
                 synchronized (this) {
                     product.showStatus();
                     invoice.showStatus();
