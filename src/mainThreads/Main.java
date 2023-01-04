@@ -1,8 +1,6 @@
 package mainThreads;
 
-import cars.Truck;
 import towns.Town;
-import warehouses.Warehouse;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

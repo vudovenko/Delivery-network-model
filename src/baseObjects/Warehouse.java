@@ -1,4 +1,4 @@
-package warehouses;
+package baseObjects;
 
 import cars.Car;
 import cars.Truck;

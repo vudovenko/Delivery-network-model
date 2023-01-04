@@ -1,4 +1,4 @@
-package warehouses;
+package baseObjects;
 
 import towns.OrderRequest;
 import towns.TypeProduct;

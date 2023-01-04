@@ -1,22 +1,21 @@
-package warehouses;
+package baseObjects;
 
 import interfaces.DemonstratingStatus;
 
-public class LoadingPost implements DemonstratingStatus {
-
+public class Forklift implements DemonstratingStatus {
     private Warehouse warehouseName;
-
-    public LoadingPost(Warehouse warehouseName) {
-        this.warehouseName = warehouseName;
-    }
 
     @Override
     public void showStatus() {
         if (warehouseName.areThereTrucksInWarehouse()) {
-            System.out.println("Пост погрузки склада \"" + warehouseName.getWarehouseName() + "\" занят");
+            System.out.println("Погрузчик начал погрузку на складе " + warehouseName.getWarehouseName());
         } else {
-            System.out.println("Пост загрузки склада \"" + warehouseName.getWarehouseName() + "\" пустует");
+            System.out.println("Погрузчик на складе " + warehouseName.getWarehouseName() + " свободен");
         }
+    }
+
+    public Forklift(Warehouse warehouseName) {
+        this.warehouseName = warehouseName;
     }
 
     public Warehouse getWarehouseName() {
@@ -29,7 +28,7 @@ public class LoadingPost implements DemonstratingStatus {
 
     @Override
     public String toString() {
-        return "LoadingPost{" +
+        return "Forklift{" +
                 "warehouseName=" + warehouseName +
                 '}';
     }

@@ -1,4 +1,4 @@
-package warehouses;
+package baseObjects;
 
 import interfaces.DemonstratingStatus;
 import towns.TypeProduct;

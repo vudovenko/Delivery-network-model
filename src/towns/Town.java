@@ -3,7 +3,7 @@ package towns;
 import interfaces.DemonstratingStatus;
 import mainThreads.Main;
 import mainThreads.TimeClass;
-import warehouses.Base;
+import baseObjects.Base;
 
 import java.util.List;
 

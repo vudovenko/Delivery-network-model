@@ -1,21 +1,20 @@
-package warehouses;
+package baseObjects;
 
 import interfaces.DemonstratingStatus;
 
-public class Storekeeper implements DemonstratingStatus {
-
+public class Invoice implements DemonstratingStatus {
     private Warehouse warehouseName;
 
     @Override
     public void showStatus() {
         if (warehouseName.areThereTrucksInWarehouse()) {
-            System.out.println("Кладовщик склада " + warehouseName.getWarehouseName() + " идет на пост загрузки");
+            System.out.println("Накладная со склада " + warehouseName.getWarehouseName() + " выдана водителю");
         } else {
-            System.out.println("Кладовщик склада " + warehouseName.getWarehouseName() + " бездействует");
+            System.out.println("Погрузка товара на складе " + warehouseName.getWarehouseName() + "еще не закончена");
         }
     }
 
-    public Storekeeper(Warehouse warehouseName) {
+    public Invoice(Warehouse warehouseName) {
         this.warehouseName = warehouseName;
     }
 
@@ -29,7 +28,7 @@ public class Storekeeper implements DemonstratingStatus {
 
     @Override
     public String toString() {
-        return "Storekeeper{" +
+        return "Invoice{" +
                 "warehouseName=" + warehouseName +
                 '}';
     }
