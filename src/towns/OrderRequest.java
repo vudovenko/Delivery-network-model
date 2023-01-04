@@ -3,10 +3,6 @@ package towns;
 import warehouses.TypeProduct;
 
 public class OrderRequest {
-    /*todo
-    *   Сделать поля:
-    *   Town, shop id, type product
-    * */
     private Town town;
     private Integer shopId;
     private TypeProduct typeProduct;
