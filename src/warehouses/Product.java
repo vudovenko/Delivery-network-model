@@ -1,14 +1,15 @@
 package warehouses;
 
 import interfaces.DemonstratingStatus;
+import towns.TypeProduct;
 
 public class Product implements DemonstratingStatus {
     private Warehouse warehouseName;
-    private String productName;
+    private TypeProduct typeProduct;
 
-    public Product(Warehouse warehouseName, String productName) {
+    public Product(Warehouse warehouseName, TypeProduct typeProduct) {
         this.warehouseName = warehouseName;
-        this.productName = productName;
+        this.typeProduct = typeProduct;
     }
 
     public Warehouse getWarehouseName() {
@@ -19,21 +20,21 @@ public class Product implements DemonstratingStatus {
         this.warehouseName = warehouseName;
     }
 
-    public String getProductName() {
-        return productName;
+    public TypeProduct getTypeProduct() {
+        return typeProduct;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setTypeProduct(TypeProduct typeProduct) {
+        this.typeProduct = typeProduct;
     }
 
     @Override
     public void showStatus() {
         if (warehouseName.areThereTrucksInWarehouse()) {
-            System.out.println("Товар " + productName
+            System.out.println("Товар " + typeProduct
                     + " со склада " + warehouseName.getWarehouseName() + " загружается в грузовик");
         } else {
-            System.out.println("Товар " + productName
+            System.out.println("Товар " + typeProduct
                     + " со склада " + warehouseName.getWarehouseName() + " лежит");
         }
     }
@@ -42,7 +43,7 @@ public class Product implements DemonstratingStatus {
     public String toString() {
         return "Product{" +
                 "warehouseName=" + warehouseName +
-                ", productName='" + productName + '\'' +
+                ", typeProduct=" + typeProduct +
                 '}';
     }
 }
