@@ -7,7 +7,7 @@ import baseObjects.Base;
 
 import java.util.List;
 
-public class Town implements DemonstratingStatus {
+public class Town extends Thread implements DemonstratingStatus {
     private List<Store> stores;
     private Integer distanceToBase;
     private Integer demand;
@@ -54,12 +54,23 @@ public class Town implements DemonstratingStatus {
         this.townName = townName;
     }
 
+    @Override
+    public void run() {
+        new Thread(() -> generateRequest()).start();
+        try {
+            Thread.sleep((long) demand * 24 * TimeClass.VIRTUAL_HOUR);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void generateRequest() {
         try {
             Thread.sleep(Main.randomNumberInRange(0, demand * 24 * TimeClass.VIRTUAL_HOUR));
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
         Integer randomStoreId = Main.randomNumberInRange(0, stores.size());
         Store store = new Store(this, randomStoreId);
         store.setIsDemandSatisfied(false);
