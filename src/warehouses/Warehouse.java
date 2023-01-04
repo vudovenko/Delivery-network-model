@@ -2,7 +2,7 @@ package warehouses;
 
 import cars.Car;
 
-public class Warehouse {
+public class Warehouse extends Thread {
     private String warehouseName;
     private Forklift forklift;
     private Invoice invoice;
@@ -25,8 +25,8 @@ public class Warehouse {
         numberTrucksInWarehouse = 0;
     }
 
-    public synchronized Boolean isThereRoomInWarehouseForTruck() {
-        return numberTrucksInWarehouse == 0;
+    public synchronized Boolean areThereTrucksInWarehouse() {
+        return numberTrucksInWarehouse != 0;
     }
 
     public Loader getLoader() {
@@ -101,48 +101,56 @@ public class Warehouse {
         this.storekeeper = storekeeper;
     }
 
-    public void startLoadingProcess(Car car) {
-        /*TODO
-           1. Машина добавляется в очередь в любом случае
-           2. Если она в очереди первая или вторая, то вызов showStatus()
-              у Storekeeper, у LoadingPost, у Forklift и у Loader
-              Начинается отсчет времени (1 час) для warehouse.
-              Срабатывает метод showStatus() у товара и у накладной.
-              Удаляется из очереди.
-           3. Если в очереди не первая или вторая, то ждет своей очереди.
-        */
-        parkingSpace.addCarToParkingSpace(car);
-        if (parkingSpace.getParkingSize() == 1) {
-            runMachineToWarehouse(car);
-        } else if (parkingSpace.getParkingSize() == 2) {
-            runMachineToWarehouse(car);
-        } else {
-            while(parkingSpace.getParkingSize() > 2) {
-                try {
-                    Thread.sleep(1);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+    @Override
+    public void run() {
+        while (true) {
+            synchronized (this) {
+                System.out.println("\nnumberTrucksInWarehouse = " + numberTrucksInWarehouse);
+                System.out.println("parkingSpace.getParkingSize() = " + parkingSpace.getParkingSize());
+                System.out.println("numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() != 0 = "
+                        + (numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() != 0) + "\n");
+                if (numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() > 0) {
+                    parkingSpace.removeCarFromParkingSpace();
+                    startLoadingProcess();
                 }
             }
-            startLoadingProcess(car);
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    private synchronized void runMachineToWarehouse(Car car) {
-        numberTrucksInWarehouse++;
+    public synchronized void runMachineToWarehouse(Car car) {
+        synchronized (this) {
+            parkingSpace.addCarToParkingSpace(car);
+        }
+    }
+
+    private void startLoadingProcess() {
+        synchronized (this) {
+            numberTrucksInWarehouse++;
+        }
+        System.out.println("\n");
         storekeeper.showStatus();
         loadingPost.showStatus();
         forklift.showStatus();
         loader.showStatus();
-        parkingSpace.removeCarFromParkingSpace();
-        car.start();
-        try {
-            car.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        product.showStatus();
-        invoice.showStatus();
+        new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+                synchronized (this) {
+                    product.showStatus();
+                    invoice.showStatus();
+                    System.out.println("numberTrucksInWarehouse = " + numberTrucksInWarehouse + "\n");
+                    this.numberTrucksInWarehouse--;
+                }
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
     }
 
     @Override
