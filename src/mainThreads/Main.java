@@ -2,16 +2,12 @@ package mainThreads;
 
 import towns.Town;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
-        //Создание формата отображения даты
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
         //Вывод нынешней даты и времени
-        System.out.println("\nДата: " + new Date().toString());
+        System.out.println("\nДата: " + new Date());
         Town Ekaterinburg = new Town(7, randomNumberInRange(10, 30),
                 1, "Екатерибург");
         Town NizhnyTagil = new Town(5, randomNumberInRange(130, 140),
@@ -21,10 +17,10 @@ public class Main {
         Town SatelliteTownsYekaterinburg = new Town(4, randomNumberInRange(10, 30),
                 4, "спуника Екатеринбурга");
         while (true) {
-            Ekaterinburg.generateRequest();
-            NizhnyTagil.generateRequest();
-            KamenskUralsky.generateRequest();
-            SatelliteTownsYekaterinburg.generateRequest();
+            Ekaterinburg.start();
+            NizhnyTagil.start();
+            KamenskUralsky.start();
+            SatelliteTownsYekaterinburg.start();
         }
     }
 
