@@ -13,9 +13,9 @@ public class LoadingPost implements DemonstratingStatus {
     @Override
     public void showStatus() {
         if (warehouseName.isThereRoomInWarehouseForTruck()) {
-            System.out.println("Пост погрузки склада \"" + warehouseName + "\" занят");
+            System.out.println("Пост погрузки склада \"" + warehouseName.getWarehouseName() + "\" занят");
         } else {
-            System.out.println("Пост загрузки склада \"" + warehouseName + "\" пустует");
+            System.out.println("Пост загрузки склада \"" + warehouseName.getWarehouseName() + "\" пустует");
         }
     }
 

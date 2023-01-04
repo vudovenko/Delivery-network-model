@@ -9,9 +9,9 @@ public class Storekeeper implements DemonstratingStatus {
     @Override
     public void showStatus() {
         if (warehouseName.isThereRoomInWarehouseForTruck()) {
-            System.out.println("Кладовщик склада " + warehouseName + " идет на пост загрузки");
+            System.out.println("Кладовщик склада " + warehouseName.getWarehouseName() + " идет на пост загрузки");
         } else {
-            System.out.println("Кладовщик склада " + warehouseName + " бездействует");
+            System.out.println("Кладовщик склада " + warehouseName.getWarehouseName() + " бездействует");
         }
     }
 
