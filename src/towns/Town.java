@@ -8,10 +8,12 @@ import java.util.List;
 public class Town implements DemonstratingStatus {
     private List<Store> stores;
     private Integer distanceToBase;
-    private Integer demand;
+    private Double demand;
 
-    public Town(Integer numberStores, Integer distanceToBase, Integer demand) {
-        stores = new ArrayList<>(numberStores);
+    public Town(Integer numberStores, Integer distanceToBase, Double demand) {
+        for (int i = 0; i < numberStores; ++i) {
+            stores.add(new Store(this, i));
+        }
         this.distanceToBase = distanceToBase;
         this.demand = demand;
     }
@@ -32,11 +34,11 @@ public class Town implements DemonstratingStatus {
         this.distanceToBase = distanceToBase;
     }
 
-    public Integer getDemand() {
+    public Double getDemand() {
         return demand;
     }
 
-    public void setDemand(Integer demand) {
+    public void setDemand(Double demand) {
         this.demand = demand;
     }
 
