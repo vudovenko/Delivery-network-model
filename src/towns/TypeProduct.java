@@ -1,7 +1,7 @@
-package warehouses;
+package towns;
 
 public enum TypeProduct {
-    HEAVY_OVERSIZED,
+    HEAVY_OVERSIZE,
     HEAVY_EURO_PALLETS,
     PLUMBING,
     LIGHT_EURO_PALLETS

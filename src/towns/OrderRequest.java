@@ -1,7 +1,5 @@
 package towns;
 
-import warehouses.TypeProduct;
-
 public class OrderRequest {
     private Town town;
     private Integer shopId;

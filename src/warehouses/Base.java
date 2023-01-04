@@ -3,8 +3,7 @@ package warehouses;
 import towns.OrderRequest;
 
 public class Base {
-//    getProductRequest(OrderRequest orderRequest)
-        /*
-        * todo
-        *  реализовать класс!*/
+    private void getProductRequest(OrderRequest orderRequest) {
+
+    }
 }
