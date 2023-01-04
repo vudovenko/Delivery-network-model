@@ -5,5 +5,5 @@ public enum TypeTime {
     SECOND,
     MINUTE,
     HOUR,
-    DAY,
+    DAY
 }
