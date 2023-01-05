@@ -4,6 +4,7 @@ import cars.Kamaz;
 import towns.OrderRequest;
 import towns.TypeProduct;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Base {
@@ -48,41 +49,35 @@ public class Base {
     }
 
     public static Warehouse findSuitableWarehouse(TypeProduct typeProduct) {
-        if (areThereMoreFreeSpacesInFirstParkingLot(typeProduct)) {
-            return findFirstWarehouseForHeavyOversize();
-        } else if (!areThereMoreFreeSpacesInFirstParkingLot(typeProduct)) {
-            return findSecondWarehouseForHeavyOversize();
+        if (typeProduct == TypeProduct.HEAVY_OVERSIZE) {
+            return findFirstAndSecondWarehouseForHeavyOversize();
         } else {
-
+            for (Warehouse warehouse : warehouses) {
+                if (warehouse.getProduct().getTypeProduct().equals(typeProduct)) {
+                    return warehouse;
+                }
+            }
         }
         return null;
     }
 
-    private static Boolean areThereMoreFreeSpacesInFirstParkingLot(TypeProduct typeProduct) {
-        return typeProduct == TypeProduct.HEAVY_OVERSIZE &&
-                findFirstWarehouseForHeavyOversize().getParkingSpace().getParkingSize() <
-                        findSecondWarehouseForHeavyOversize().getParkingSpace().getParkingSize();
-    }
-
-    private static Warehouse findFirstWarehouseForHeavyOversize() {
+    private static Warehouse findFirstAndSecondWarehouseForHeavyOversize() {
+        List<Warehouse> warehousesForHeavyOversize = new ArrayList<>();
         for (Warehouse warehouse : warehouses) {
             if (warehouse.getProduct().getTypeProduct() == TypeProduct.HEAVY_OVERSIZE) {
-                return warehouse;
+                warehousesForHeavyOversize.add(warehouse);
             }
         }
-        return null;
+        return determineWarehouseWithMostParkingSpaces(warehousesForHeavyOversize);
     }
 
-    private static Warehouse findSecondWarehouseForHeavyOversize() {
-        Integer counter = 0;
-        for (Warehouse warehouse : warehouses) {
-            if (warehouse.getProduct().getTypeProduct() == TypeProduct.HEAVY_OVERSIZE && counter == 1) {
-                return warehouse;
-            } else {
-                counter++;
-            }
+    private static Warehouse determineWarehouseWithMostParkingSpaces(List<Warehouse> warehousesForHeavyOversize) {
+        if (warehousesForHeavyOversize.get(0).getParkingSpace().getParkingSize() <
+                warehousesForHeavyOversize.get(1).getParkingSpace().getParkingSize()) {
+            return warehousesForHeavyOversize.get(0);
+        } else {
+            return warehousesForHeavyOversize.get(1);
         }
-        return null;
     }
 
     @Override
