@@ -1,6 +1,7 @@
 package baseObjects;
 
 import cars.Car;
+import cars.Kamaz;
 import cars.Truck;
 import mainThreads.TimeClass;
 import towns.TypeProduct;
@@ -15,6 +16,7 @@ public class Warehouse extends Thread {
     private Storekeeper storekeeper;
     private ParkingSpace parkingSpace;
     private static Integer numberTrucksInWarehouse;
+    private Boolean hasKamazArrived;
 
     public Warehouse(String warehouseName, TypeProduct typeProduct) {
         this.warehouseName = warehouseName;
@@ -26,6 +28,7 @@ public class Warehouse extends Thread {
         this.storekeeper = new Storekeeper(this);
         parkingSpace = new ParkingSpace();
         numberTrucksInWarehouse = 0;
+        hasKamazArrived = false;
     }
 
     public synchronized Boolean areThereTrucksInWarehouse() {
@@ -104,6 +107,14 @@ public class Warehouse extends Thread {
         this.storekeeper = storekeeper;
     }
 
+    public Boolean getHasKamazArrived() {
+        return hasKamazArrived;
+    }
+
+    public void setHasKamazArrived(Boolean hasKamazArrived) {
+        this.hasKamazArrived = hasKamazArrived;
+    }
+
     @Override
     public void run() {
         while (true) {
@@ -113,8 +124,15 @@ public class Warehouse extends Thread {
 //                System.out.println("numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() != 0 = "
 //                        + (numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() != 0) + "\n");
                 if (numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() > 0) {
-                    Truck truck = (Truck) parkingSpace.removeCarFromParkingSpace();
-                    startLoadingProcess(truck);
+                    while (hasKamazArrived && numberTrucksInWarehouse != 0) {
+                        try {
+                            Thread.sleep(1);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    Car car = parkingSpace.removeCarFromParkingSpace();
+                    startLoadingProcess(car);
                 }
             }
 
@@ -127,30 +145,46 @@ public class Warehouse extends Thread {
     }
 
     public synchronized void runMachineToWarehouse(Car car) {
+        if (car instanceof Kamaz) {
+            hasKamazArrived = !hasKamazArrived;
+        }
         synchronized (this) {
             parkingSpace.addCarToParkingSpace(car);
+            System.out.println(car + " прибыл на парковку склада " + warehouseName);
         }
     }
 
-    private void startLoadingProcess(Truck truck) {
+    private void startLoadingProcess(Car car) {
         synchronized (this) {
             numberTrucksInWarehouse++;
         }
-        System.out.println("\n");
-        storekeeper.showStatus();
-        loadingPost.showStatus();
-        forklift.showStatus();
-        loader.showStatus();
+        if (car instanceof Truck) {
+            System.out.println("\n");
+            storekeeper.showStatus();
+            loadingPost.showStatus();
+            forklift.showStatus();
+            loader.showStatus();
+        }
+        sendToWarehouse(car);
+    }
+
+    private void sendToWarehouse(Car car) {
         new Thread(() -> {
             try {
-                Thread.sleep(TimeClass.VIRTUAL_HOUR);
+                Thread.sleep((long) TimeClass.VIRTUAL_HOUR * car.getTimeInWarehouse());
                 synchronized (this) {
-                    product.showStatus();
-                    invoice.showStatus();
+                    if (car instanceof Truck) {
+                        product.showStatus();
+                        invoice.showStatus();
+                    }
                     System.out.println("numberTrucksInWarehouse = " + numberTrucksInWarehouse + "\n");
                     numberTrucksInWarehouse--;
-                    System.out.println("Грузовик выехал со склада " + warehouseName);
-                    CarPark.sendCarToPark(truck);
+                    System.out.println(car + " выехал со склада " + warehouseName);
+                    if (car instanceof Truck) {
+                        CarPark.sendCarToPark((Truck) car);
+                    } else {
+                        hasKamazArrived = !hasKamazArrived;
+                    }
                 }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
