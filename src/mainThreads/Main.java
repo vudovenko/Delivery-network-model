@@ -13,12 +13,12 @@ public class Main {
 
         /*
          * todo
-         *  Камаз сделать класс - Влад
+         *  Камаз сделать класс - +
          *  Подсуетиться с зп водителя и грузчика (день/ночь)
          *  Клин код, пж + красиво
          *  Подкорректировать вывод в консоль - Андрей
          *  Километры и сон потоков грузовиков
-         *  5-й склад - Влад
+         *  5-й склад - +
          * */
 
         TimeClass timeClass = new TimeClass();
@@ -31,15 +31,17 @@ public class Main {
         Town SatelliteTownsYekaterinburg = new Town(4, randomNumberInRange(10, 30),
                 4, "спутнике Екатеринбурга");
         Warehouse warehouse1 = new Warehouse("Склад1", TypeProduct.HEAVY_OVERSIZE);
-        Warehouse warehouse2 = new Warehouse("Склад2", TypeProduct.HEAVY_EURO_PALLETS);
-        Warehouse warehouse3 = new Warehouse("Склад3", TypeProduct.PLUMBING);
-        Warehouse warehouse4 = new Warehouse("Склад4", TypeProduct.LIGHT_EURO_PALLETS);
+        Warehouse warehouse2 = new Warehouse("Склад2", TypeProduct.HEAVY_OVERSIZE);
+        Warehouse warehouse3 = new Warehouse("Склад3", TypeProduct.HEAVY_EURO_PALLETS);
+        Warehouse warehouse4 = new Warehouse("Склад4", TypeProduct.PLUMBING);
+        Warehouse warehouse5 = new Warehouse("Склад5", TypeProduct.LIGHT_EURO_PALLETS);
 
         ArrayList<Warehouse> warehouses = new ArrayList<>();
         warehouses.add(warehouse1);
         warehouses.add(warehouse2);
         warehouses.add(warehouse3);
         warehouses.add(warehouse4);
+        warehouses.add(warehouse5);
 
         Base base = new Base(warehouses);
         CarPark carPark = new CarPark();
@@ -49,6 +51,7 @@ public class Main {
         warehouse2.start();
         warehouse3.start();
         warehouse4.start();
+        warehouse5.start();
 
         Ekaterinburg.start();
         NizhnyTagil.start();
