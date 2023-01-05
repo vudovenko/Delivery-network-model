@@ -1,5 +1,6 @@
 package baseObjects;
 
+import cars.Kamaz;
 import towns.OrderRequest;
 import towns.TypeProduct;
 
@@ -21,6 +22,22 @@ public class Base {
         Base.warehouses = warehouses;
     }
 
+    public static void sendKamazToWarehouses() {
+        new Thread(() -> {
+            Kamaz kamaz = new Kamaz(25, 3);
+            for (Warehouse warehouse : warehouses) {
+                warehouse.runMachineToWarehouse(kamaz);
+                while(warehouse.getHasKamazArrived()) {
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        }).start();
+    }
+
     public static void getProductRequest(OrderRequest orderRequest) {
         System.out.printf("База получила запрос из города \"" + orderRequest.getTown().getTownName()
                 + "\" от магазина №" + orderRequest.getShopId()
@@ -38,11 +55,7 @@ public class Base {
                 warehouses.get(1).getParkingSpace().getParkingSize()) {
             return warehouses.get(0);
         } else {
-            for (Warehouse warehouse : warehouses) {
-                if (warehouse.getProduct().getTypeProduct().equals(typeProduct)) {
-                    return warehouse;
-                }
-            }
+
         }
         return null;
     }

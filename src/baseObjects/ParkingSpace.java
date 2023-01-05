@@ -1,6 +1,7 @@
 package baseObjects;
 
 import cars.Car;
+import cars.Truck;
 
 import java.util.LinkedList;
 
@@ -15,7 +16,13 @@ public class ParkingSpace {
     }
 
     public void addCarToParkingSpace(Car car) {
-        parkingQueue.offerLast(car);
+        if (car instanceof Truck) {
+            // приехал грузовик
+            parkingQueue.offerLast(car);
+        } else {
+            // приехал камаз
+            parkingQueue.offerFirst(car);
+        }
         parkingSize++;
     }
 
