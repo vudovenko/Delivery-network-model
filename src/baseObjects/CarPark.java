@@ -10,7 +10,7 @@ public class CarPark {
     public CarPark() {
         trucks = new ArrayDeque<>();
         for (int i = 0; i < 20; i++) {
-            trucks.addLast(new Truck(30)); // todo поработать над скоростью траков
+            trucks.addLast(new Truck(30, 1)); // todo поработать над скоростью траков
         }
     }
 

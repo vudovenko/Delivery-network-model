@@ -2,9 +2,19 @@ package cars;
 
 public abstract class Car {
     private Integer speed;
+    private Integer timeInWarehouse;
 
-    public Car(Integer speed) {
+    public Car(Integer speed, Integer timeInWarehouse) {
         this.speed = speed;
+        this.timeInWarehouse = timeInWarehouse;
+    }
+
+    public Integer getTimeInWarehouse() {
+        return timeInWarehouse;
+    }
+
+    public void setTimeInWarehouse(Integer timeInWarehouse) {
+        this.timeInWarehouse = timeInWarehouse;
     }
 
     public Integer getSpeed() {
