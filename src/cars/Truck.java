@@ -1,8 +1,13 @@
 package cars;
 
+import towns.Town;
+
 public class Truck extends Car {
 
-    public Truck(Integer speed, Integer timeInWarehouse) {
+    private Town town;
+
+    public Truck(Integer speed, Integer timeInWarehouse, Town town) {
+
         super(speed, timeInWarehouse);
     }
 

@@ -30,7 +30,8 @@ public class Base {
             while (true) {
                 Kamaz kamaz = new Kamaz(25, 4);
                 try {
-                    Thread.sleep((long) Main.randomNumberInRange(0, kamaz.getTimeInWarehouse()) * 24 * TimeClass.VIRTUAL_HOUR);
+                    Thread.sleep((long) Main
+                            .randomNumberInRange(0, kamaz.getTimeInWarehouse()) * 24 * TimeClass.VIRTUAL_HOUR);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

@@ -159,10 +159,10 @@ public class Warehouse extends Thread {
             forklift.showStatus();
             loader.showStatus();
         }
-        sendToWarehouse(car);
+        sendFromWarehouse(car);
     }
 
-    private void sendToWarehouse(Car car) {
+    private void sendFromWarehouse(Car car) {
         new Thread(() -> {
             try {
                 Thread.sleep((long) TimeClass.VIRTUAL_HOUR * car.getTimeInWarehouse());

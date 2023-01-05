@@ -1,6 +1,7 @@
 package baseObjects;
 
 import cars.Truck;
+import towns.Town;
 
 import java.util.ArrayDeque;
 
@@ -10,13 +11,13 @@ public class CarPark {
     public CarPark() {
         trucks = new ArrayDeque<>();
         for (int i = 0; i < 20; i++) {
-            trucks.addLast(new Truck(30, 1)); // todo поработать над скоростью траков
+            trucks.addLast(new Truck(30, 1, null)); // todo поработать над скоростью траков
         }
     }
 
-    public static void sendCarToWarehouse(Warehouse warehouse) {
+    public static void sendCarToWarehouse(Warehouse warehouse, Town town) {
         System.out.println("\nГрузовик едет на склад " + warehouse.getWarehouseName() + "\n");
-        warehouse.runMachineToWarehouse(trucks.pollFirst());
+        warehouse.runMachineToWarehouse(trucks.pollFirst()); //todo тута
     }
 
     public static void sendCarToPark(Truck truck) {
