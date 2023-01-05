@@ -4,6 +4,7 @@ import cars.Car;
 import cars.Kamaz;
 import cars.Truck;
 import mainThreads.TimeClass;
+import towns.Store;
 import towns.TypeProduct;
 
 public class Warehouse extends Thread {
@@ -171,11 +172,12 @@ public class Warehouse extends Thread {
                         product.showStatus();
                         invoice.showStatus();
                     }
-                    System.out.println("numberTrucksInWarehouse = " + numberTrucksInWarehouse + "\n");
                     numberTrucksInWarehouse--;
-                    System.out.println(car + " выехал со склада " + warehouseName);
                     if (car instanceof Truck) {
-                        CarPark.sendCarToPark((Truck) car);
+                        System.out.println(car + " выехал со склада " + warehouseName
+                                + " в город " + ((Truck) car).getTown().getTownName()
+                        + " в магазин №" + ((Truck) car).getStore().getId());
+                        Store.getTruckWithProduct((Truck) car);
                     } else {
                         hasKamazArrived = !hasKamazArrived;
                     }

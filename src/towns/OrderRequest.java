@@ -2,12 +2,12 @@ package towns;
 
 public class OrderRequest {
     private Town town;
-    private Integer shopId;
+    private Store store;
     private TypeProduct typeProduct;
 
-    public OrderRequest(Town town, Integer shopId, TypeProduct typeProduct) {
+    public OrderRequest(Town town, Store store, TypeProduct typeProduct) {
         this.town = town;
-        this.shopId = shopId;
+        this.store = store;
         this.typeProduct = typeProduct;
     }
 
@@ -19,12 +19,12 @@ public class OrderRequest {
         this.town = town;
     }
 
-    public Integer getShopId() {
-        return shopId;
+    public Store getStore() {
+        return store;
     }
 
-    public void setShopId(Integer shopId) {
-        this.shopId = shopId;
+    public void setStore(Store store) {
+        this.store = store;
     }
 
     public TypeProduct getTypeProduct() {
@@ -39,7 +39,7 @@ public class OrderRequest {
     public String toString() {
         return "OrderRequest{" +
                 "town=" + town +
-                ", shopId=" + shopId +
+                ", store=" + store +
                 ", typeProduct=" + typeProduct +
                 '}';
     }

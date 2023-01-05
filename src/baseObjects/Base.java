@@ -28,7 +28,7 @@ public class Base {
     public static void sendKamazToWarehouses() {
         new Thread(() -> {
             while (true) {
-                Kamaz kamaz = new Kamaz(25, 4);
+                Kamaz kamaz = new Kamaz(25, 20, 4);
                 try {
                     Thread.sleep((long) Main
                             .randomNumberInRange(0, kamaz.getTimeInWarehouse()) * 24 * TimeClass.VIRTUAL_HOUR);
@@ -50,12 +50,12 @@ public class Base {
     }
 
     public static void getProductRequest(OrderRequest orderRequest) {
-        System.out.printf("База получила запрос из города \"" + orderRequest.getTown().getTownName()
-                + "\" от магазина №" + orderRequest.getShopId()
-                + " на товар \"" + orderRequest.getTypeProduct().getName() + "\"");
+        System.out.printf("База получила запрос из города " + orderRequest.getTown().getTownName()
+                + " от магазина №" + orderRequest.getStore().getId()
+                + " на товар " + orderRequest.getTypeProduct().getName());
         Warehouse warehouse = Base.findSuitableWarehouse(orderRequest.getTypeProduct());
 
-        CarPark.sendCarToWarehouse(warehouse);
+        CarPark.sendCarToWarehouse(warehouse, orderRequest);
     }
 
     public static Warehouse findSuitableWarehouse(TypeProduct typeProduct) {

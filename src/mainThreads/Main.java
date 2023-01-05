@@ -10,17 +10,10 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+        startProgram();
+    }
 
-        /*
-         * todo
-         *  Камаз сделать класс - +
-         *  Подсуетиться с зп водителя и грузчика (день/ночь)
-         *  Клин код, пж + красиво
-         *  Подкорректировать вывод в консоль - Андрей
-         *  Километры и сон потоков грузовиков
-         *  5-й склад - +
-         * */
-
+    private static void startProgram() {
         TimeClass timeClass = new TimeClass();
         Town Ekaterinburg = new Town(7, randomNumberInRange(10, 30),
                 1, "Екатеринбург");
@@ -61,6 +54,6 @@ public class Main {
     }
 
     public static Integer randomNumberInRange(Integer min, Integer max) {
-        return (int)(Math.random()*((max-min)+1))+min;
+        return (int) (Math.random() * ((max - min) + 1)) + min;
     }
 }

@@ -3,19 +3,15 @@ package mainThreads;
 import java.util.Date;
 
 public class TimeClass extends Thread {
-    private volatile Date date;
-    public static final Integer VIRTUAL_HOUR = 100;
+    private static volatile Date date;
+    public static final Integer VIRTUAL_HOUR = 1000;
 
     public TimeClass() {
         this.date = new Date();
     }
 
-    public Date getDate() {
+    public static Date getCurrentDate() {
         return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     @Override

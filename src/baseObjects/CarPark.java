@@ -1,6 +1,9 @@
 package baseObjects;
 
 import cars.Truck;
+import mainThreads.TimeClass;
+import towns.OrderRequest;
+import towns.Store;
 import towns.Town;
 
 import java.util.ArrayDeque;
@@ -11,19 +14,31 @@ public class CarPark {
     public CarPark() {
         trucks = new ArrayDeque<>();
         for (int i = 0; i < 20; i++) {
-            trucks.addLast(new Truck(30, 1, null)); // todo поработать над скоростью траков
+            trucks.addLast(new Truck(45, 30, 1));
         }
     }
 
-    public static void sendCarToWarehouse(Warehouse warehouse, Town town) {
+    public static void sendCarToWarehouse(Warehouse warehouse, OrderRequest orderRequest) {
         System.out.println("\nГрузовик едет на склад " + warehouse.getWarehouseName() + "\n");
-        warehouse.runMachineToWarehouse(trucks.pollFirst()); //todo тута
+        Truck truck = trucks.pollFirst();
+        truck.setTown(orderRequest.getTown());
+        truck.setStore(orderRequest.getStore());
+        truck.setTypeProduct(orderRequest.getTypeProduct());
+
+        warehouse.runMachineToWarehouse(truck);
     }
 
     public static void sendCarToPark(Truck truck) {
-        trucks.addLast(truck);
-        System.out.println("Грузовик прибыл в парк. " +
-                "Машин в парке: " + trucks.size() + " штук");
+        new Thread(() -> {
+            try {
+                Thread.sleep(Store.calculateTravelTime(truck) * TimeClass.VIRTUAL_HOUR);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            trucks.addLast(truck);
+            System.out.println("Грузовик прибыл в парк. " +
+                    "Машин в парке: " + trucks.size() + " штук");
+        }).start();
     }
 
     public ArrayDeque<Truck> getTrucks() {

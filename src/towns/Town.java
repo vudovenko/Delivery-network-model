@@ -80,7 +80,7 @@ public class Town extends Thread {
         store.setIsDemandSatisfied(false);
         stores.set(randomStoreId, store);
         stores.get(randomStoreId).showStatus();
-        OrderRequest orderRequest = new OrderRequest(this, randomStoreId,
+        OrderRequest orderRequest = new OrderRequest(this, stores.get(randomStoreId),
                 stores.get(randomStoreId).getThisProductNeed());
         Base.getProductRequest(orderRequest);
     }

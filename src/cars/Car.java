@@ -1,11 +1,13 @@
 package cars;
 
 public abstract class Car {
-    private Integer speed;
+    private Integer nightSpeed;
+    private Integer daySpeed;
     private Integer timeInWarehouse;
 
-    public Car(Integer speed, Integer timeInWarehouse) {
-        this.speed = speed;
+    public Car(Integer nightSpeed, Integer daySpeed, Integer timeInWarehouse) {
+        this.nightSpeed = nightSpeed;
+        this.daySpeed = daySpeed;
         this.timeInWarehouse = timeInWarehouse;
     }
 
@@ -17,18 +19,28 @@ public abstract class Car {
         this.timeInWarehouse = timeInWarehouse;
     }
 
-    public Integer getSpeed() {
-        return speed;
+    public Integer getNightSpeed() {
+        return nightSpeed;
     }
 
-    public void setSpeed(Integer speed) {
-        this.speed = speed;
+    public void setNightSpeed(Integer nightSpeed) {
+        this.nightSpeed = nightSpeed;
+    }
+
+    public Integer getDaySpeed() {
+        return daySpeed;
+    }
+
+    public void setDaySpeed(Integer daySpeed) {
+        this.daySpeed = daySpeed;
     }
 
     @Override
     public String toString() {
         return "Car{" +
-                "speed=" + speed +
+                "nightSpeed=" + nightSpeed +
+                ", daySpeed=" + daySpeed +
+                ", timeInWarehouse=" + timeInWarehouse +
                 '}';
     }
 }

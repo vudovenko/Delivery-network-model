@@ -2,8 +2,8 @@ package cars;
 
 public class Kamaz extends Car {
 
-    public Kamaz(Integer speed, Integer timeInWarehouse) {
-        super(speed, timeInWarehouse);
+    public Kamaz(Integer nightSpeed, Integer daySpeed, Integer timeInWarehouse) {
+        super(nightSpeed, daySpeed, timeInWarehouse);
     }
 
     @Override
