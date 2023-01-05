@@ -33,7 +33,7 @@ public class Base {
     public static Warehouse findSuitableWarehouse(TypeProduct typeProduct) {
         if (areThereMoreFreeSpacesInFirstParkingLot(typeProduct)) {
             return findFirstWarehouseForHeavyOversize();
-        } else if (areThereMoreFreeSpacesInFirstParkingLot(typeProduct)) {
+        } else if (!areThereMoreFreeSpacesInFirstParkingLot(typeProduct)) {
             return findSecondWarehouseForHeavyOversize();
         } else {
             for (Warehouse warehouse : warehouses) {
