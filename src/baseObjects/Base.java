@@ -31,9 +31,17 @@ public class Base {
     }
 
     public static Warehouse findSuitableWarehouse(TypeProduct typeProduct) {
-        for (Warehouse warehouse : warehouses) {
-            if (warehouse.getProduct().getTypeProduct().equals(typeProduct)) {
-                return warehouse;
+        if (typeProduct == TypeProduct.HEAVY_OVERSIZE && warehouses.get(0).getParkingSpace().getParkingSize() >
+                warehouses.get(1).getParkingSpace().getParkingSize()) {
+            return warehouses.get(1);
+        } else if (typeProduct == TypeProduct.HEAVY_OVERSIZE && warehouses.get(0).getParkingSpace().getParkingSize() <
+                warehouses.get(1).getParkingSpace().getParkingSize()) {
+            return warehouses.get(0);
+        } else {
+            for (Warehouse warehouse : warehouses) {
+                if (warehouse.getProduct().getTypeProduct().equals(typeProduct)) {
+                    return warehouse;
+                }
             }
         }
         return null;
