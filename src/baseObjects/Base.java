@@ -1,6 +1,8 @@
 package baseObjects;
 
 import cars.Kamaz;
+import mainThreads.Main;
+import mainThreads.TimeClass;
 import towns.OrderRequest;
 import towns.TypeProduct;
 
@@ -25,14 +27,21 @@ public class Base {
 
     public static void sendKamazToWarehouses() {
         new Thread(() -> {
-            Kamaz kamaz = new Kamaz(25, 3);
-            for (Warehouse warehouse : warehouses) {
-                warehouse.runMachineToWarehouse(kamaz);
-                while(warehouse.getHasKamazArrived()) {
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+            while (true) {
+                Kamaz kamaz = new Kamaz(25, 4);
+                try {
+                    Thread.sleep((long) Main.randomNumberInRange(0, kamaz.getTimeInWarehouse()) * 24 * TimeClass.VIRTUAL_HOUR);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                for (Warehouse warehouse : warehouses) {
+                    warehouse.runMachineToWarehouse(kamaz);
+                    while (warehouse.getHasKamazArrived()) {
+                        try {
+                            Thread.sleep(1);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
             }

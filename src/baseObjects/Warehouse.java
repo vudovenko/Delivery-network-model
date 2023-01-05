@@ -16,7 +16,7 @@ public class Warehouse extends Thread {
     private Storekeeper storekeeper;
     private ParkingSpace parkingSpace;
     private static Integer numberTrucksInWarehouse;
-    private Boolean hasKamazArrived;
+    private volatile Boolean hasKamazArrived;
 
     public Warehouse(String warehouseName, TypeProduct typeProduct) {
         this.warehouseName = warehouseName;
@@ -119,10 +119,6 @@ public class Warehouse extends Thread {
     public void run() {
         while (true) {
             synchronized (this) {
-//                System.out.println("\nnumberTrucksInWarehouse = " + numberTrucksInWarehouse);
-//                System.out.println("parkingSpace.getParkingSize() = " + parkingSpace.getParkingSize());
-//                System.out.println("numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() != 0 = "
-//                        + (numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() != 0) + "\n");
                 if (numberTrucksInWarehouse < 2 && parkingSpace.getParkingSize() > 0) {
                     while (hasKamazArrived && numberTrucksInWarehouse != 0) {
                         try {
@@ -148,10 +144,8 @@ public class Warehouse extends Thread {
         if (car instanceof Kamaz) {
             hasKamazArrived = !hasKamazArrived;
         }
-        synchronized (this) {
-            parkingSpace.addCarToParkingSpace(car);
-            System.out.println(car + " прибыл на парковку склада " + warehouseName);
-        }
+        parkingSpace.addCarToParkingSpace(car);
+        System.out.println(car + " прибыл на парковку склада " + warehouseName);
     }
 
     private void startLoadingProcess(Car car) {
